@@ -33,7 +33,6 @@ public class Track {
     private int runTime;
 
     @NotNull(message = "artistId must not be null")
-    @Size(max = 255)
     @Column(name = "artist_id")
     private int artistId;
 
