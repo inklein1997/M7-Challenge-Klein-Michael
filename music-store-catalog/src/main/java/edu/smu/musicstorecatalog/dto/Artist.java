@@ -1,6 +1,7 @@
 package edu.smu.musicstorecatalog.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,11 +22,11 @@ public class Artist {
     @Size(max = 50)
     private String name;
 
-    @Null
+    @Nullable
     @Size(max = 255)
     private String instagram;
 
-    @Null
+    @Nullable
     @Size(max = 255)
     private String twitter;
 
