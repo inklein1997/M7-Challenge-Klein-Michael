@@ -30,7 +30,7 @@ public class Album {
     @Column(name = "artist_id")
     private int artistId;
 
-    @NotNull(message = "releaseDate must not be null")
+    @NotNull(message = "releaseDate must not be (yyyy-MM-dd)")
     @Column(name = "release_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;

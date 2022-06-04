@@ -1,10 +1,10 @@
 package edu.smu.musicstorecatalog.controller;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import edu.smu.musicstorecatalog.dto.Album;
+import edu.smu.musicstorecatalog.dto.Label;
 import edu.smu.musicstorecatalog.service.ServiceLayer;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,22 +17,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(AlbumController.class)
-public class AlbumControllerTest {
+@WebMvcTest(LabelController.class)
+public class LabelControllerTest {
 
     @MockBean
     ServiceLayer serviceLayer;
@@ -40,47 +39,45 @@ public class AlbumControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private ObjectMapper mapper = JsonMapper.builder()
-            .addModule(new JavaTimeModule())
-            .build();
+    private ObjectMapper mapper = new ObjectMapper();
 
-    private List<Album> expectedAlbumList;
-    private Album expectedAlbum;
-    private Album inputtedAlbum;
+    private List<Label> expectedLabelList;
+    private Label expectedLabel;
+    private Label inputtedLabel;
     private String expectedJson;
     private String inputtedJson;
 
     @Before
     public void setUpAndMocking() {
-        expectedAlbumList = Arrays.asList(
-                new Album(2, "Red", 1, LocalDate.of(2012,10,22), 1, 4.99),
-                new Album(1, "Night Visions", 2, LocalDate.of(2012,9,12), 2, 3.99)
+        expectedLabelList = Arrays.asList(
+                new Label(1, "Sony Music Entertainment", "https://www.sonymusic.com/"),
+                new Label(2, "Warner Music Group.", "https://www.wmg.com/")
         );
-        expectedAlbum = new Album(2, "Red", 1, LocalDate.of(2012,10,22), 1, 4.99);
-        inputtedAlbum = new Album(2, "Red", 1, LocalDate.of(2012,10,22), 1, 4.99);
+        expectedLabel = new Label(2, "Warner Music Group.", "https://www.wmg.com/");
+        inputtedLabel = new Label(2, "Warner Music Group.", "https://www.wmg.com/");
 
-        when(serviceLayer.getAllAlbums()).thenReturn(expectedAlbumList);
-        when(serviceLayer.getAlbumById(2)).thenReturn(Optional.of(expectedAlbum));
-        when(serviceLayer.createAlbum(inputtedAlbum)).thenReturn(expectedAlbum);
+        when(serviceLayer.getAllLabels()).thenReturn(expectedLabelList);
+        when(serviceLayer.getLabelById(2)).thenReturn(Optional.of(expectedLabel));
+        when(serviceLayer.createLabel(inputtedLabel)).thenReturn(expectedLabel);
     }
 
     /* ============================= TESTING GET ROUTES ============================= */
     /* --------------------------------- HAPPY PATHS -------------------------------- */
     @Test
-    public void shouldReturnListOfAllGamesAndStatus200() throws Exception {
-        expectedJson = mapper.writeValueAsString(expectedAlbumList);
+    public void shouldReturnListOfAllLabelsAndStatus200() throws Exception {
+        expectedJson = mapper.writeValueAsString(expectedLabelList);
 
-        mockMvc.perform(get("/album"))
+        mockMvc.perform(get("/label"))
                 .andDo(print())
                 .andExpect(content().json(expectedJson))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void shouldReturnGameByIdAndStatus200() throws Exception {
-        expectedJson = mapper.writeValueAsString(expectedAlbum);
+    public void shouldReturnLabelByIdAndStatus200() throws Exception {
+        expectedJson = mapper.writeValueAsString(expectedLabel);
 
-        mockMvc.perform(get("/album/2"))
+        mockMvc.perform(get("/label/2"))
                 .andDo(print())
                 .andExpect(content().json(expectedJson))
                 .andExpect(status().isOk());
@@ -88,8 +85,8 @@ public class AlbumControllerTest {
 
     /* ---------------------------------- SAD PATHS --------------------------------- */
     @Test
-    public void shouldReturn404StatusCodeIfGameIdDoesNotExist() throws Exception {
-        mockMvc.perform(get("/album/10023"))
+    public void shouldReturn404StatusCodeIfLabelIdDoesNotExist() throws Exception {
+        mockMvc.perform(get("/label/10023"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
@@ -97,11 +94,11 @@ public class AlbumControllerTest {
     /* ============================= TESTING POST ROUTES ============================= */
     /* --------------------------------- HAPPY PATHS -------------------------------- */
     @Test
-    public void shouldReturnGameOnPostRequestAndStatus201() throws Exception {
-        expectedJson = mapper.writeValueAsString(expectedAlbum);
-        inputtedJson = mapper.writeValueAsString(inputtedAlbum);
+    public void shouldReturnLabelOnPostRequestAndStatus201() throws Exception {
+        expectedJson = mapper.writeValueAsString(expectedLabel);
+        inputtedJson = mapper.writeValueAsString(inputtedLabel);
 
-        mockMvc.perform(post("/album")
+        mockMvc.perform(post("/label")
                         .content(inputtedJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -119,7 +116,7 @@ public class AlbumControllerTest {
 
         inputtedJson = mapper.writeValueAsString(invalidRequestBody);
 
-        mockMvc.perform(post("/album")
+        mockMvc.perform(post("/label")
                         .content(inputtedJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -130,9 +127,9 @@ public class AlbumControllerTest {
     /* --------------------------------- HAPPY PATHS -------------------------------- */
     @Test
     public void shouldRespondWithStatus204WithValidPutRequest() throws Exception {
-        inputtedJson = mapper.writeValueAsString(inputtedAlbum);
+        inputtedJson = mapper.writeValueAsString(inputtedLabel);
 
-        mockMvc.perform(put("/album/2")
+        mockMvc.perform(put("/label/2")
                         .content(inputtedJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -140,10 +137,10 @@ public class AlbumControllerTest {
     }
     /* ---------------------------------- SAD PATHS --------------------------------- */
     @Test
-    public void shouldReturn422StatusCodeIfGameIdsDoNotMatch() throws Exception {
-        inputtedJson = mapper.writeValueAsString(inputtedAlbum);
+    public void shouldReturn422StatusCodeIfLabelIdsDoNotMatch() throws Exception {
+        inputtedJson = mapper.writeValueAsString(inputtedLabel);
 
-        mockMvc.perform(put("/album/69421")
+        mockMvc.perform(put("/label/69421")
                         .content(inputtedJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -158,7 +155,7 @@ public class AlbumControllerTest {
 
         inputtedJson = mapper.writeValueAsString(invalidRequestBody);
 
-        mockMvc.perform(put("/album/136")
+        mockMvc.perform(put("/label/136")
                         .content(inputtedJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -169,14 +166,14 @@ public class AlbumControllerTest {
     /* --------------------------------- HAPPY PATHS -------------------------------- */
     @Test
     public void shouldRespondWithStatus204WithValidDeleteRequest() throws Exception {
-        mockMvc.perform(delete("/album/2"))
+        mockMvc.perform(delete("/label/2"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
 
     /* ---------------------------------- SAD PATHS --------------------------------- */
-    @Test public void shouldResponseWithStatus404IfGameIdIsNotFoundForDelete() throws Exception {
-        mockMvc.perform(delete("/album/1412"))
+    @Test public void shouldResponseWithStatus404IfLabelIdIsNotFoundForDelete() throws Exception {
+        mockMvc.perform(delete("/label/1412"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }

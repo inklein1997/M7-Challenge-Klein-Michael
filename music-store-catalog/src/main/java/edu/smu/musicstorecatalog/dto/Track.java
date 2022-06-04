@@ -1,10 +1,12 @@
 package edu.smu.musicstorecatalog.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -35,11 +37,12 @@ public class Track {
     @Column(name = "artist_id")
     private int artistId;
 
-    @NotNull(message = "releaseDate must not be null")
+    @NotNull(message = "releaseDate must not be null (yyyy-MM-dd)")
     @Column(name = "release_date")
-    private Date releaseDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate releaseDate;
 
-    public Track(int trackId, int albumId, String title, int runTime, int artistId, Date releaseDate) {
+    public Track(int trackId, int albumId, String title, int runTime, int artistId, LocalDate releaseDate) {
         this.trackId = trackId;
         this.albumId = albumId;
         this.title = title;
@@ -48,7 +51,7 @@ public class Track {
         this.releaseDate = releaseDate;
     }
 
-    public Track(int albumId, String title, int runTime, int artistId, Date releaseDate) {
+    public Track(int albumId, String title, int runTime, int artistId, LocalDate releaseDate) {
         this.albumId = albumId;
         this.title = title;
         this.runTime = runTime;
@@ -99,11 +102,11 @@ public class Track {
         this.artistId = artistId;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
