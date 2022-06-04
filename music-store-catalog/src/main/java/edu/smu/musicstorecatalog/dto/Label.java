@@ -18,7 +18,7 @@ public class Label {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "label_id")
     private int labelId;
-    @NotNull
+    @NotNull(message = "name must not be null")
     @Size(max = 50)
     private String name;
     @Null

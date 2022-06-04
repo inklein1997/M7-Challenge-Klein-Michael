@@ -17,7 +17,7 @@ public class Artist {
     @Column(name = "artist_id")
     private int artistId;
 
-    @NotNull
+    @NotNull(message = "name must not be null")
     @Size(max = 50)
     private String name;
 

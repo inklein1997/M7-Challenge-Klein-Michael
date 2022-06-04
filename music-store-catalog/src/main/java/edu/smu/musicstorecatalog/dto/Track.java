@@ -18,24 +18,24 @@ public class Track {
     @Column(name = "track_id")
     private int trackId;
 
-    @NotNull
+    @NotNull(message = "albumId must not be null")
     @Column(name = "album_id")
     private int albumId;
 
-    @NotNull
+    @NotNull(message = "title must not be null")
     @Size(max = 50)
     private String title;
 
-    @NotNull
+    @NotNull(message = "runTime must not be null")
     @Column(name = "run_time")
     private int runTime;
 
-    @NotNull
+    @NotNull(message = "artistId must not be null")
     @Size(max = 255)
     @Column(name = "artist_id")
     private int artistId;
 
-    @NotNull
+    @NotNull(message = "releaseDate must not be null")
     @Column(name = "release_date")
     private Date releaseDate;
 

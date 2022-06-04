@@ -1,11 +1,15 @@
 package edu.smu.musicstorecatalog.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,28 +22,29 @@ public class Album {
     @Column(name = "album_id")
     private int albumId;
 
-    @NotNull
+    @NotNull(message = "title must not be null")
     @Size(max = 50)
     private String title;
 
-    @NotNull
-    @Size(max = 255)
+    @NotNull(message = "artistId must not be null")
     @Column(name = "artist_id")
     private int artistId;
 
-    @NotNull
+    @NotNull(message = "releaseDate must not be null")
     @Column(name = "release_date")
-    private Date releaseDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate releaseDate;
 
-    @NotNull
+    @NotNull(message = "labelId must not be null")
     @Column(name = "label_id")
     private int labelId;
 
-    @NotNull
+    @NotNull(message = "listPrice must not be null")
     @Column(name = "list_price")
+    @Digits(integer = 5, fraction = 2)
     private double listPrice;
 
-    public Album(int albumId, String title, int artistId, Date releaseDate, int labelId, double listPrice) {
+    public Album(int albumId, String title, int artistId, LocalDate releaseDate, int labelId, double listPrice) {
         this.albumId = albumId;
         this.title = title;
         this.artistId = artistId;
@@ -48,7 +53,7 @@ public class Album {
         this.listPrice = listPrice;
     }
 
-    public Album(String title, int artistId, Date releaseDate, int labelId, double listPrice) {
+    public Album(String title, int artistId, LocalDate releaseDate, int labelId, double listPrice) {
         this.title = title;
         this.artistId = artistId;
         this.releaseDate = releaseDate;
@@ -83,11 +88,11 @@ public class Album {
         this.artistId = artistId;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
