@@ -127,7 +127,7 @@ public class ServiceLayerTest {
         );
         actualArtistRecommendationList = serviceLayer.getAllArtistRecommendations();
 
-        assertEquals(expectedAlbumRecommendationList, actualArtistRecommendationList);
+        assertEquals(expectedArtistRecommendationList, actualArtistRecommendationList);
     }
 
     @Test
