@@ -1,0 +1,752 @@
+---
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  "/trackRecommendation/{id}":
+    get:
+      tags:
+      - track-recommendation-controller
+      operationId: getTrackRecommendationById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/TrackRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    put:
+      tags:
+      - track-recommendation-controller
+      operationId: updateTrackRecommendation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TrackRecommendation"
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    delete:
+      tags:
+      - track-recommendation-controller
+      operationId: deleteTrackRecommendation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+  "/labelRecommendation/{id}":
+    get:
+      tags:
+      - label-recommendation-controller
+      operationId: getLabelRecommendationById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/LabelRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    put:
+      tags:
+      - label-recommendation-controller
+      operationId: updateLabelRecommendation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/LabelRecommendation"
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    delete:
+      tags:
+      - label-recommendation-controller
+      operationId: deleteLabelRecommendation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+  "/artistRecommendation/{id}":
+    get:
+      tags:
+      - artist-recommendation-controller
+      operationId: getArtistRecommendationById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ArtistRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    put:
+      tags:
+      - artist-recommendation-controller
+      operationId: updateArtistRecommendation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ArtistRecommendation"
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    delete:
+      tags:
+      - artist-recommendation-controller
+      operationId: deleteArtistRecommendation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+  "/albumRecommendation/{id}":
+    get:
+      tags:
+      - album-recommendation-controller
+      operationId: getAlbumRecommendationById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/AlbumRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    put:
+      tags:
+      - album-recommendation-controller
+      operationId: updateAlbumRecommendation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AlbumRecommendation"
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    delete:
+      tags:
+      - album-recommendation-controller
+      operationId: deleteAlbumRecommendation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+  "/trackRecommendation":
+    get:
+      tags:
+      - track-recommendation-controller
+      operationId: getAllTrackRecommendations
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TrackRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    post:
+      tags:
+      - track-recommendation-controller
+      operationId: createTrackRecommendation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TrackRecommendation"
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/TrackRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+  "/labelRecommendation":
+    get:
+      tags:
+      - label-recommendation-controller
+      operationId: getAllLabelRecommendation
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/LabelRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    post:
+      tags:
+      - label-recommendation-controller
+      operationId: createLabelRecommendation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/LabelRecommendation"
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/LabelRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+  "/artistRecommendation":
+    get:
+      tags:
+      - artist-recommendation-controller
+      operationId: getAllArtistRecommendations
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ArtistRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    post:
+      tags:
+      - artist-recommendation-controller
+      operationId: createArtistRecommendation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ArtistRecommendation"
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ArtistRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+  "/albumRecommendation":
+    get:
+      tags:
+      - album-recommendation-controller
+      operationId: getAllAlbumRecommendations
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/AlbumRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+    post:
+      tags:
+      - album-recommendation-controller
+      operationId: createAlbumRecommendation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AlbumRecommendation"
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/AlbumRecommendation"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/CustomErrorResponse"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    "$ref": "#/components/schemas/CustomErrorResponse"
+                - "$ref": "#/components/schemas/CustomErrorResponse"
+components:
+  schemas:
+    CustomErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMsg:
+          type: string
+        status:
+          type: integer
+          format: int32
+        timestamp:
+          type: string
+          format: date-time
+    TrackRecommendation:
+      required:
+      - liked
+      - trackId
+      - userId
+      type: object
+      properties:
+        trackRecommendationId:
+          type: integer
+          format: int32
+        trackId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        liked:
+          type: boolean
+    LabelRecommendation:
+      required:
+      - labelId
+      - liked
+      - userId
+      type: object
+      properties:
+        labelRecommendationId:
+          type: integer
+          format: int32
+        labelId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        liked:
+          type: boolean
+    ArtistRecommendation:
+      required:
+      - artistId
+      - liked
+      - userId
+      type: object
+      properties:
+        artistRecommendationId:
+          type: integer
+          format: int32
+        artistId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        liked:
+          type: boolean
+    AlbumRecommendation:
+      required:
+      - albumId
+      - liked
+      - userId
+      type: object
+      properties:
+        albumRecommendationId:
+          type: integer
+          format: int32
+        albumId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        liked:
+          type: boolean
